@@ -1,14 +1,22 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-// prototypes
+#define WORDCNT 20
 
-int main() {
-    char valid[] = "(djfk[kfdsj{012}hello]world)";
-    char invalid[] = "(hello[how{are]youtoday})";
+int main (void) {
 
-    printf("%s\n", valid);
-    printf("%s\n", invalid);
+    char *sptr;
+    sptr = (char *) malloc(sizeof(char)*20);
+
+    int res = 1+EOF;
+    int cnt = 0;
+    while (res != EOF) {
+        res = scanf("%c", &sptr[cnt]);
+        cnt++;
+    }
+
+    for(int j=0; j<cnt; j++) {
+        printf("%c", sptr[j]);
+    }
+    return 0;
 }
-
-// functions
