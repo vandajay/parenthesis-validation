@@ -1,22 +1,37 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
-#define WORDCNT 20
+int isParenthesisValid(char *p);
 
 int main (void) {
 
-    char *sptr;
-    sptr = (char *) malloc(sizeof(char)*20);
-
-    int res = 1+EOF;
+    char *sptr[10];
     int cnt = 0;
-    while (res != EOF) {
-        res = scanf("%c", &sptr[cnt]);
+    int res = 1+EOF;
+
+   while (res != EOF) { 
+        char input[30];
+        sptr[cnt] = (char *) malloc(sizeof(char)*30);
+        res = scanf("%s", input);
+        strcpy(sptr[cnt], input);
         cnt++;
     }
 
-    for(int j=0; j<cnt; j++) {
-        printf("%c", sptr[j]);
+//    for(int j = 0; j < cnt-1; j++) {
+//        printf("%s", sptr[j]);
+//    }
+
+
+    for(int j=0; j < cnt-1; j++) {
+        if (isParenthesisValid(*(sptr+j)) == 0)
+            printf("VALID");
+        else
+            printf("NOT VALID");
     }
+    return 0;
+}
+
+int isParenthesisValid(char *p) {
     return 0;
 }
