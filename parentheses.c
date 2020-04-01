@@ -4,28 +4,28 @@
 int isParenthesisValid(char *s, int size);
 
 int main (void) {
-
-    char *sptr;
+    char *sptr = NULL;
     size_t maxlen = 1000;
     int ssize = 0;
 
    while (ssize != -1) {
        sptr = (char *) malloc(sizeof(char)*maxlen);
        ssize = getline(&sptr, &maxlen, stdin);
-       
-       if (ssize == -1)
+       if (ssize == -1) {
+           free(sptr);
            return 0;
-       else if (isParenthesisValid(sptr, ssize) == 1)
+       }
+       if (isParenthesisValid(sptr, ssize) == 1)
            printf("VALID");
        else
            printf("NOT VALID");
-    }
+   }
    free(sptr);
-    return 0;
+   return 0;
 }
 
 int isParenthesisValid(char *s, int size) {
-    char *arr;
+    char *arr = NULL;
     arr = (char *) malloc(sizeof(char)*size);
     int cnt = 0;
     int i = 0;
@@ -37,6 +37,7 @@ int isParenthesisValid(char *s, int size) {
         }
         if(s[i] == ')' || s[i] == ']' || s[i] == '}') {
             if (cnt == 0) {
+                free(arr);
                 return 0;
             }
             else {
@@ -50,15 +51,18 @@ int isParenthesisValid(char *s, int size) {
                     cnt--;
                 }
                 else {
+                    free(arr);
                     return 0;
                 }
             }
         }
     }
-    free(arr);
     if (cnt > 0) {
+        free(arr);
         return 0;
     }
-    else
+    else {
+        free(arr);
         return 1;
+    }
 }
