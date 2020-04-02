@@ -6,21 +6,23 @@ int isParenthesisValid(char *s, int size);
 int main (void) {
     char *sptr = NULL;
     size_t maxlen = 1000;
-    int ssize = 0;
+    int ssize = EOF+1;
+    int isValid = 0;
 
-   while (ssize != -1) {
+   while (ssize != EOF) {
        sptr = (char *) malloc(sizeof(char)*maxlen);
        ssize = getline(&sptr, &maxlen, stdin);
-       if (ssize == -1) {
-           free(sptr);
-           return 0;
+
+       isValid = isParenthesisValid(sptr, ssize);
+
+       if(ssize != EOF) {
+           if (isValid == 1)
+               printf("VALID");
+           else if (isValid == 0)
+               printf("NOT VALID");
        }
-       if (isParenthesisValid(sptr, ssize) == 1)
-           printf("VALID");
-       else
-           printf("NOT VALID");
+       free(sptr);
    }
-   free(sptr);
    return 0;
 }
 
